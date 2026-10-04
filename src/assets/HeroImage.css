@@ -1,0 +1,47 @@
+
+.heroContainer {
+    position: relative;
+    width: 120px;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden; 
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.heroContainer:hover {
+    transform: scale(2);
+    z-index: 10;
+}
+
+.herocard {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-name-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    padding: 4px 0;
+    
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgb(0, 0, 0, 0)); 
+    color: #ffffff;
+    font-family: cinzel;
+    font-weight: bold;
+    text-align: center;
+    
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none; 
+}
+
+
+.heroContainer:hover .hero-name-overlay {
+    opacity: 1;
+}
+

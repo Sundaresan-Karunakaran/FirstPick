@@ -1,0 +1,48 @@
+.mainBox {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.videoBox {
+    width: 50%;
+    font-size: 70px;
+    font-family: cinzel;
+    color: white;
+    font-weight: 100px;
+}
+
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #555;
+}
+
+.underlineBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#effectBox {
+    position: absolute;
+    width: 30%;
+    right: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.08);
+    z-index: 1;
+    transform: skewX(-30deg); 
+    transform-origin: top right;
+}
+
+@keyframes slideIn {
+    from {
+        transform: skewY(-45deg) translateX(-100vw);
+        opacity: 0;
+    }
+    to {
+        transform: skewY(0deg) translateX(0);
+        opacity: 1;
+    }
+}
