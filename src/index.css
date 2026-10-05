@@ -33,3 +33,19 @@ a {
 a:visited {
     color: white;
 }
+
+.desktopOnlyMessage {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #11191c;
+  background: url('../public/dota.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  font-family: montserrat, sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
