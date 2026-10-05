@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
+  <!-- Background Box -->
+  <rect width="100" height="100" rx="16" fill="#121418" />
+  <!-- Radiant Base -->
+  <rect x="15" y="57" width="28" height="28" rx="4" fill="#547873" />
+  <!-- Dire Base -->
+  <rect x="57" y="15" width="28" height="28" rx="4" fill="#547873" />
+  <!-- Diagonal River Bar -->
+  <polygon points="12,12 88,88 76,88 12,24" fill="#547873" />
+</svg>

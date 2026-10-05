@@ -18,43 +18,43 @@ export const ALL_HERO_INFO = gql`
     }
 ` 
 
-// const { loading, error, data, refetch } = useQuery(ALL_HERO_INFO, {
-//         variables: { limit: 10, offset: 0 },
-//         notifyOnNetworkStatusChange: true,
-//     });
 
 export const HERO_MATCHUP_INFO = gql`
-    query {
+    query GetHeroMatchups($heroId: Short!) {
         heroStats {
-            heroVsHeroMatchup (heroId: 2){
-            advantage{
-                heroId,
-                matchCountVs,
-                matchCountWith,
-                vs {
-                    heroId1,
-                    heroId2,
-                    week,
-                    kills,
-                    matchCount,
-                    synergy,
-                    winRateHeroId1,
-                    winRateHeroId2,
-                    winsAverage
+            heroVsHeroMatchup(heroId: $heroId) {
+                advantage {
+                    heroId
+                    matchCountVs
+                    matchCountWith
+                    vs {
+                        heroId1
+                        heroId2
+                        matchCount
+                        synergy
+                        winsAverage
+                    }
+                    with {
+                        heroId1
+                        heroId2
+                        matchCount
+                        synergy
+                        winsAverage
+                    }
                 }
-                with {
-                    heroId1,
-                    heroId2,
-                    week,
-                    kills,
-                    matchCount,
-                    synergy,
-                    winRateHeroId1,
-                    winRateHeroId2,
-                    winsAverage
-                }
-            }
             }
         }
     }
-`
+`;
+
+export const HERO_HYPE_INFO = gql`
+query GetDotaHeroes($heroId: Short!){
+    constants{
+        hero(id: $heroId){
+        displayName
+        language {
+        displayName,
+        hype,
+        lore
+}}}
+}`

@@ -1,15 +1,24 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { Link } from 'react-router-dom'
 import './App.css'
-import HeroListPage from './assets/HeroListPage'
+import Header from './assets/Header.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)  
   return (
     <>
-      <HeroListPage></HeroListPage>
+      <Header />
+      <main className="landingPage">
+        <section className="landingContent">
+          <p className="landingEyebrow">DOTA 2 DRAFTING COMPANION</p>
+          <h1>Make your next pick count.</h1>
+          <p className="landingDescription">
+            Explore hero matchups, discover strong synergies, and build a better
+            draft before the game begins.
+          </p>
+          <Link className="landingButton" to="/heroes">
+            Browse heroes <span>→</span>
+          </Link>
+        </section>
+      </main>
     </>
   )
 }
