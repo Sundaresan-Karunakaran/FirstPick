@@ -4,6 +4,7 @@ import HeroImage from "./HeroImage.jsx";
 import { useQuery } from '@apollo/client/react';
 import {ALL_HERO_INFO} from '../utils/stratzQueries.js'
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 function HeroList() {
 
     const { loading, error, data, refetch } = useQuery(ALL_HERO_INFO, {
@@ -18,6 +19,47 @@ function HeroList() {
     const [loadedImageCount, setLoadedImageCount] = useState(0)
     const loadedImageIds = React.useRef(new Set());
     const heroes = data?.constants?.heroes ?? [];
+
+    const timeoutMs = 5000;
+    const [lastPressedKey, setLastPressedKey] = useState("");
+    const handleKeyPress = (event) => {
+        if (event.key === 'Escape') {
+            setLastPressedKey('');
+            if (timerRef.current) clearTimeout(timerRef.current);
+            return;
+        }
+        if (event.key === 'Backspace') {
+            setLastPressedKey((prev) => prev.slice(0, -1));
+        }
+
+        else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+            setLastPressedKey((prev) => prev + event.key);
+        } else {
+            return;
+        }
+
+        timerRef.current = setTimeout(() => {
+            setLastPressedKey('');
+        }, timeoutMs);
+
+    };
+    const timerRef = useRef(null);
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyPress);
+        
+        return () => window.removeEventListener("keydown", handleKeyPress);
+    }, []);
+
+    const isHeroDimmed = (displayName, name) => {
+        if (!lastPressedKey) return false; // Don't dim anything if user hasn't typed
+        const query = lastPressedKey.toLowerCase();
+        
+        // Check both displayName ("Anti-Mage") and internal name ("npc_dota_hero_antimage")
+        const matchDisplay = displayName.toLowerCase().includes(query);
+        const matchName = name ? name.toLowerCase().includes(query) : false;
+        
+        return !matchDisplay && !matchName;
+    };
 
     useEffect(() => {
         loadedImageIds.current = new Set();
@@ -61,7 +103,7 @@ function HeroList() {
         );
     }
 
-    
+
 
     if (error) {
         return (
@@ -93,7 +135,7 @@ function HeroList() {
                         </div>
                         <div className="heroAttribute" >
                             {strengthHeroes.map((hero) => {
-                            return (<HeroImage key={hero.id} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
+                            return (<HeroImage key={hero.id} isDimmed={isHeroDimmed(hero.displayName, hero.name)} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
                             
                         })}
                         </div>
@@ -106,7 +148,7 @@ function HeroList() {
                         </div>
                         <div className="heroAttribute" >
                             {agilityHeroes.map((hero) => {
-                            return (<HeroImage key={hero.id} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
+                            return (<HeroImage key={hero.id} isDimmed={isHeroDimmed(hero.displayName, hero.name)} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
                             
                         })}
                         </div>
@@ -119,7 +161,7 @@ function HeroList() {
                         </div>
                         <div className="heroAttribute" >
                             {intelligenceHeroes.map((hero) => {
-                            return (<HeroImage key={hero.id} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
+                            return (<HeroImage key={hero.id} isDimmed={isHeroDimmed(hero.displayName, hero.name)} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
                             
                         })}
                         </div>
@@ -132,7 +174,7 @@ function HeroList() {
                         </div>
                         <div className="heroAttribute" >
                             {universalHeroes.map((hero) => {
-                            return (<HeroImage key={hero.id} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
+                            return (<HeroImage key={hero.id} isDimmed={isHeroDimmed(hero.displayName, hero.name)} heroId={hero.id} displayName={hero.displayName} name={hero.name} onImageSettled={handleImageSettled}></HeroImage>)
                             
                         })}
                         </div>                        

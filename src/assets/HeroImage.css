@@ -44,3 +44,21 @@
 .heroContainer:hover .hero-name-overlay {
     opacity: 1;
 }
+
+
+.heroCard {
+  position: relative;
+  transition: transform 0.15s ease, filter 0.2s ease, opacity 0.2s ease;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.heroCard.dimmed {
+  filter: grayscale(85%) brightness(0.25);
+  opacity: 0.4;
+}
+
+.heroCard.active {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+}

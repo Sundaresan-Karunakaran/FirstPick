@@ -10,7 +10,7 @@ export function getHeroImageUrl(name) {
     return `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${getHeroImageName(name)}.png`;
 }
 
-function HeroImage({heroId, displayName, name, onImageSettled}) {
+function HeroImage({heroId, displayName, name, onImageSettled, isDimmed}) {
     const imageName = getHeroImageName(name);
     const imageSettled = React.useRef(false);
 
@@ -33,7 +33,7 @@ function HeroImage({heroId, displayName, name, onImageSettled}) {
 
     return (
         <Link to={`/hero/${heroId}/${imageName}`} >
-        <div className="heroContainer" >
+        <div className={`heroContainer heroCard ${isDimmed ? 'dimmed' : 'active'}`} >
             <img
                 className="herocard"
                 src={imageURL}
